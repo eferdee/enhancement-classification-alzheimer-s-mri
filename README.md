@@ -25,6 +25,19 @@ The application provides a simple web interface where users can upload MRI image
 - Pillow
 - HTML, CSS, JavaScript
 
+## 📦 Pre-trained Models
+
+The trained model weights are **not included** in this repository due to GitHub's file size limitations.
+
+Please download the pre-trained models from the following links:
+
+| Model | Description | Download |
+|-------|-------------|----------|
+| NAFNet | MRI image enhancement model | **[Google Drive](https://drive.google.com/file/d/1bmBtFX6zEWcD6Qnct1q2nB9Guz2IBiq8/view?usp=drive_link)** |
+| Baseline Classifier | Alzheimer's disease classification model | **[Google Drive](https://drive.google.com/file/d/14uF8OsThus7ZD1D_2QIOXapjfaB0n4Dn/view?usp=drive_link)** |
+
+After downloading, place the model files in the project root:
+
 ## 📂 Project Structure
 
 ```text
