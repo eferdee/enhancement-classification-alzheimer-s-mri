@@ -8,6 +8,18 @@ Early detection of Alzheimer's disease plays a crucial role in supporting timely
 
 The application provides a simple web interface where users can upload MRI images and obtain enhanced images for further analysis.
 
+## 📖 Research Summary
+
+Alzheimer's disease is a progressive neurodegenerative disorder and the leading cause of dementia. MRI-based classification using deep learning can be significantly affected by image noise, particularly **Rician noise**, which degrades image quality and reduces classification performance.
+
+This project proposes an image enhancement pipeline using the **Nonlinear Activation Free Network (NAFNet)** to improve MRI image quality before Alzheimer's disease classification. The enhanced images are subsequently classified using **ResNet18**, and the performance is evaluated on three image conditions:
+
+- Original MRI images
+- MRI images with synthetic Rician noise
+- MRI images enhanced using NAFNet
+
+Image enhancement quality is evaluated using **Peak Signal-to-Noise Ratio (PSNR)** and **Structural Similarity Index Measure (SSIM)**, while classification performance is assessed using **Accuracy** and **Macro F1-score**.
+
 ## ✨ Features
 
 - MRI image enhancement using NAFNet
@@ -24,6 +36,44 @@ The application provides a simple web interface where users can upload MRI image
 - NumPy
 - Pillow
 - HTML, CSS, JavaScript
+
+## 🏗️ Model Architecture
+
+### Image Enhancement
+
+- Model: **Nonlinear Activation Free Network (NAFNet)**
+- Adapted for MRI image enhancement
+- Conservative residual scaling wrapper
+- Optional flat architecture (without U-Net configuration)
+
+### Classification
+
+- Backbone: **ResNet18**
+- Framework: **PyTorch**
+
+## 📊 Experimental Results
+
+### Image Enhancement Performance
+
+| Image Condition | PSNR (dB) | SSIM |
+|----------------|----------:|-----:|
+| Noisy MRI | 25.91 ± 5.63 | 0.5361 ± 0.0921 |
+| Enhanced MRI | **34.57 ± 3.38** | **0.9626 ± 0.0226** |
+
+### Alzheimer's Disease Classification Performance
+
+| Dataset | Accuracy | Precision | Recall | Macro F1-Score |
+|---------|---------:|----------:|-------:|---------------:|
+| Raw MRI | **98.34%** | **98.75%** | **99.03%** | **98.87%** |
+| Noisy MRI | 79.11% | 89.41% | 73.55% | 76.82% |
+| Enhanced MRI | **96.78%** | **97.00%** | **98.34%** | **97.61%** |
+
+### Key Findings
+
+- Image enhancement increased **PSNR** from **25.91 dB** to **34.57 dB**.
+- **SSIM** improved from **0.5361** to **0.9626**, indicating significantly better structural similarity.
+- Classification performance recovered from **79.11%** accuracy on noisy MRI images to **96.78%** after enhancement.
+- The proposed enhancement pipeline effectively mitigates the impact of Rician noise while preserving diagnostic information for Alzheimer's disease classification.
 
 ## 📦 Pre-trained Models
 
