@@ -1,0 +1,648 @@
+/* style.css — AlzheAI | Clean Medical | Hijau & Teal */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
+/* ====================================================================
+   RESET & ROOT
+   ==================================================================== */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Core palette */
+    --green-deep:    #0d4a3a;
+    --green-mid:     #0f6b52;
+    --green-base:    #10856a;
+    --green-light:   #12a07e;
+    --teal-base:     #0891b2;
+    --teal-light:    #06b6d4;
+    --teal-soft:     #cffafe;
+
+    /* Neutrals */
+    --white:         #ffffff;
+    --surface:       #f4faf8;
+    --surface-2:     #e8f5f1;
+    --border:        #d0ebe3;
+    --border-focus:  #10856a;
+    --text-primary:  #0c2e24;
+    --text-secondary:#4a7566;
+    --text-muted:    #8aada4;
+
+    /* Semantic */
+    --success:       #10856a;
+    --error-bg:      #fff1f2;
+    --error-border:  #fecdd3;
+    --error-text:    #be123c;
+    --info-bg:       #f0fdfa;
+    --info-border:   #99f6e4;
+    --info-text:     #0f766e;
+
+    /* Shadows */
+    --shadow-xs: 0 1px 2px rgba(13, 74, 58, 0.05);
+    --shadow-sm: 0 2px 8px rgba(13, 74, 58, 0.08);
+    --shadow-md: 0 4px 20px rgba(13, 74, 58, 0.10);
+    --shadow-lg: 0 8px 32px rgba(13, 74, 58, 0.12);
+
+    /* Radii */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+
+    /* Typography */
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+}
+
+/* ====================================================================
+   BASE
+   ==================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--surface);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle grid texture on background */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ====================================================================
+   HEADER
+   ==================================================================== */
+
+.header {
+    position: relative;
+    text-align: center;
+    padding: 56px 24px 40px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Decorative orb behind header */
+.header::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 320px;
+    height: 200px;
+    background: radial-gradient(ellipse, rgba(16, 133, 106, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.logo {
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    color: var(--green-deep);
+    margin-bottom: 6px;
+    position: relative;
+}
+
+/* Accent dot on logo */
+.logo::after {
+    content: '·';
+    color: var(--teal-light);
+    margin-left: 2px;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    letter-spacing: 0.01em;
+}
+
+/* ====================================================================
+   TAB NAVIGATION
+   ==================================================================== */
+
+.tab-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 28px 24px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-btn {
+    padding: 10px 28px;
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-secondary);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    letter-spacing: 0.01em;
+    box-shadow: var(--shadow-xs);
+}
+
+.tab-btn:hover {
+    border-color: var(--green-light);
+    color: var(--green-mid);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-1px);
+}
+
+.tab-btn.active {
+    background: var(--green-base);
+    border-color: var(--green-base);
+    color: var(--white);
+    box-shadow: 0 4px 14px rgba(16, 133, 106, 0.30);
+    transform: translateY(-1px);
+}
+
+/* ====================================================================
+   CONTAINER & LAYOUT
+   ==================================================================== */
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 28px 24px 72px;
+    position: relative;
+    z-index: 1;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: tabFadeIn 0.28s ease forwards;
+}
+
+@keyframes tabFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 900px) {
+    .content-grid { grid-template-columns: 1fr; }
+}
+
+/* ====================================================================
+   CARDS
+   ==================================================================== */
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.card-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+/* ====================================================================
+   UPLOAD AREA
+   ==================================================================== */
+
+.upload-area {
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 40px 24px;
+    text-align: center;
+    background: var(--surface);
+    cursor: pointer;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle inner glow on hover */
+.upload-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(ellipse at 50% 0%, rgba(16, 133, 106, 0.06) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.upload-area:hover::before {
+    opacity: 1;
+}
+
+.upload-area:hover {
+    border-color: var(--green-base);
+    border-style: solid;
+    background: #f0faf7;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.upload-area.drag-over {
+    border-color: var(--teal-base);
+    background: var(--teal-soft);
+    transform: scale(1.01);
+}
+
+.upload-area.has-image {
+    border-style: solid;
+    border-color: var(--border);
+    padding: 16px;
+    background: var(--white);
+    cursor: default;
+    min-height: unset;
+}
+
+.upload-area.has-image:hover {
+    transform: none;
+    background: var(--white);
+    box-shadow: none;
+}
+
+/* Upload icon — circular badge */
+.upload-icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.upload-area:hover .upload-icon-wrap {
+    background: rgba(16, 133, 106, 0.1);
+    border-color: var(--green-light);
+}
+
+.upload-text {
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.upload-subtext {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 320px;
+    border-radius: var(--radius-md);
+    object-fit: contain;
+    display: block;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* ====================================================================
+   BUTTONS
+   ==================================================================== */
+
+.btn {
+    width: 100%;
+    margin-top: 16px;
+    padding: 13px 24px;
+    background: var(--green-base);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 10px rgba(16, 133, 106, 0.20);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer on hover */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transition: left 0.4s ease;
+}
+
+.btn:hover:not(:disabled)::after {
+    left: 150%;
+}
+
+.btn:hover:not(:disabled) {
+    background: var(--green-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(16, 133, 106, 0.30);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 1px 6px rgba(16, 133, 106, 0.20);
+}
+
+.btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* ====================================================================
+   RESULT BOX
+   ==================================================================== */
+
+.result-box {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    border: 1px solid var(--border);
+    margin-top: 0;
+}
+
+.result-box.empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 52px 24px;
+    font-size: 0.875rem;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* Empty state icon */
+.result-box.empty::before {
+    content: '◌';
+    font-size: 2rem;
+    color: var(--border);
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* ====================================================================
+   RESULT CONTENT
+   ==================================================================== */
+
+.result-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+}
+
+.result-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(16, 133, 106, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.result-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.01em;
+}
+
+/* Main prediction card */
+.prediction-main {
+    background: linear-gradient(135deg, rgba(16, 133, 106, 0.06) 0%, rgba(6, 182, 212, 0.06) 100%);
+    border: 1px solid rgba(16, 133, 106, 0.15);
+    padding: 20px;
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.prediction-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.prediction-value {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.prediction-confidence {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--teal-base);
+    font-weight: 500;
+}
+
+/* Probability bars */
+.probability-section {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.probability-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.probability-name {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.probability-value {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--green-base);
+    font-weight: 500;
+}
+
+.probability-bar-bg {
+    height: 5px;
+    background: var(--surface-2);
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.probability-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--green-base) 0%, var(--teal-light) 100%);
+    border-radius: 100px;
+    transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+}
+
+/* ====================================================================
+   MESSAGES
+   ==================================================================== */
+
+.message {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+    border: 1px solid;
+}
+
+.message-error {
+    background: var(--error-bg);
+    border-color: var(--error-border);
+    color: var(--error-text);
+}
+
+.message-info {
+    background: var(--info-bg);
+    border-color: var(--info-border);
+    color: var(--info-text);
+}
+
+/* ====================================================================
+   LOADING SPINNER
+   ==================================================================== */
+
+.loading {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.55s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ====================================================================
+   DOWNLOAD BUTTON
+   ==================================================================== */
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--green-base);
+    border: 1.5px solid var(--green-base);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: all 0.2s ease;
+    letter-spacing: 0.01em;
+}
+
+.download-btn:hover {
+    background: var(--green-base);
+    color: var(--white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(16, 133, 106, 0.25);
+}
+
+/* ====================================================================
+   SCROLLBAR (Webkit)
+   ==================================================================== */
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ====================================================================
+   RESPONSIVE
+   ==================================================================== */
+
+@media (max-width: 600px) {
+    .header { padding: 40px 16px 28px; }
+    .logo { font-size: 2rem; }
+    .container { padding: 20px 14px 60px; }
+    .card { padding: 20px; }
+    .tab-btn { padding: 9px 20px; font-size: 0.85rem; }
+}

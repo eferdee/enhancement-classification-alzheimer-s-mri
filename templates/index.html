@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlzheAI - Klasifikasi & Enhancement MRI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header class="header">
+        <h1 class="logo">AlzheAI</h1>
+        <p class="subtitle">Enhancement dan Klasifikasi MRI Alzheimer</p>
+    </header>
+
+    <nav class="tab-navigation">
+        <button class="tab-btn active" data-tab="enhance">Enhance</button>
+        <button class="tab-btn" data-tab="klasifikasi">Klasifikasi</button>
+    </nav>
+
+    <div class="container">
+
+        <!-- ======================== ENHANCE TAB ======================== -->
+        <div id="enhance" class="tab-content active">
+            <div class="content-grid">
+                <div class="card">
+                    <h2 class="card-title">Upload Gambar untuk Enhancement</h2>
+                    <div class="upload-area" id="uploadAreaEnhance">
+                        <div id="uploadPlaceholderEnhance">
+                            <div class="upload-icon-wrap">📁</div>
+                            <div class="upload-text">Upload atau Drag & Drop</div>
+                            <div class="upload-subtext">gambar yang ingin di-enhance</div>
+                        </div>
+                        <img id="previewEnhance" class="preview-image" style="display:none;" alt="">
+                    </div>
+                    <input type="file" id="fileInputEnhance" accept="image/*">
+                    <button class="btn" id="btnEnhance">Enhance</button>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Hasil Enhancement</h2>
+                    <div class="result-box empty" id="resultEnhance">
+                        <p>Gambar hasil enhancement akan muncul di sini</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ======================== KLASIFIKASI TAB ======================== -->
+        <div id="klasifikasi" class="tab-content">
+            <div class="content-grid">
+                <div class="card">
+                    <h2 class="card-title">Upload Gambar MRI</h2>
+                    <div class="upload-area" id="uploadAreaKlasifikasi">
+                        <div id="uploadPlaceholderKlasifikasi">
+                            <div class="upload-icon-wrap">📁</div>
+                            <div class="upload-text">Upload atau Drag & Drop</div>
+                            <div class="upload-subtext">gambar yang ingin diklasifikasi</div>
+                        </div>
+                        <img id="previewKlasifikasi" class="preview-image" style="display:none;" alt="">
+                    </div>
+                    <input type="file" id="fileInputKlasifikasi" accept="image/*">
+                    <button class="btn" id="btnKlasifikasi">Klasifikasi</button>
+                </div>
+
+                <div class="card">
+                    <h2 class="card-title">Hasil Prediksi</h2>
+                    <div class="result-box empty" id="resultKlasifikasi">
+                        <p>Hasil prediksi akan muncul di sini setelah klasifikasi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
